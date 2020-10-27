@@ -6,6 +6,7 @@ export class StudentList extends Component {
   // eslint-disable-next-line react/state-in-constructor
   state = {
     students: [],
+    openAddBlock: 'none',
   };
 
   componentDidMount() {
@@ -14,6 +15,12 @@ export class StudentList extends Component {
 
   setStudents = (students) => {
     this.setState({ students });
+  };
+
+  changeOpenAddBlockStatus = () => {
+    // eslint-disable-next-line react/no-access-state-in-setstate
+    const status = this.state.openAddBlock === 'none' ? 'block' : 'none';
+    this.setState({ openAddBlock: status });
   };
 
   render() {
@@ -25,7 +32,14 @@ export class StudentList extends Component {
           <StudentItem key={student.id} student={student} />
         ))}
         {/* eslint-disable-next-line react/button-has-type */}
-        <button className="add-student">+添加学员</button>
+        <button className="add-student" onClick={this.changeOpenAddBlockStatus}>
+          +添加学员
+        </button>
+        <div style={{ display: this.state.openAddBlock }} className="student-form">
+          <form>
+            <input type="text" placeholder="姓名" />
+          </form>
+        </div>
       </div>
     );
   }
