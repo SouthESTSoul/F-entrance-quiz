@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
+import './StudentItem.scss';
 
 export class StudentItem extends Component {
-  // constructor(id, name) {
-  //   super();
-  // this.id = id;
-  // this.name = name;
-  // };
-
   render() {
     const { id, name } = this.props.student;
     return (
       <div className="StudentItem">
-        <p>{id}</p>
-        <p>{name}</p>
+        <p>
+          {id}. {name}
+        </p>
       </div>
     );
   }

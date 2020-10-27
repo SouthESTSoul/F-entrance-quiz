@@ -19,10 +19,13 @@ export class StudentList extends Component {
   render() {
     const { students } = this.state;
     return (
-      <div className="StudentItem">
+      <div>
+        <h1>学员列表</h1>
         {students.map((student) => (
           <StudentItem key={student.id} student={student} />
         ))}
+        {/* eslint-disable-next-line react/button-has-type */}
+        <button className="add-student">+添加学员</button>
       </div>
     );
   }

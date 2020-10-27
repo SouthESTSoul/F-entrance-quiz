@@ -1,7 +1,7 @@
 import { StudentModel } from '../models';
-import { httpGet, httpPost, URL } from './base';
+import { httpGet, httpPost } from './base';
 
-const ENDPOINT = `${URL  }/students`;
+const ENDPOINT = 'http://localhost:8080/students';
 
 export async function apiGetStudents() {
   const response = await httpGet(ENDPOINT);
