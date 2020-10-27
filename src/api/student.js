@@ -1,9 +1,9 @@
 import { StudentModel } from '../models';
 import { httpGet, httpPost, URL } from './base';
 
-const ENDPOINT = `${URL}/products`;
+const ENDPOINT = `${URL  }/students`;
 
-export async function apiGetProducts() {
+export async function apiGetStudents() {
   const response = await httpGet(ENDPOINT);
   const data = await response.json();
 
@@ -14,7 +14,7 @@ export async function apiGetProducts() {
   return data.map(({ id, name }) => new StudentModel(id, name));
 }
 
-export async function apiCreateProduct(product) {
+export async function apiAddStudent(product) {
   const response = await httpPost(ENDPOINT, product);
 
   if (response.status !== 201) {

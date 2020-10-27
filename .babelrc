@@ -1,19 +1,9 @@
 {
   "presets": ["@babel/preset-env", "@babel/preset-react"],
+  "plugins": ["@babel/plugin-transform-runtime"],
   "env": {
     "test": {
       "presets": [["@babel/preset-env", { "targets": { "node": "current" } }]]
     }
-  },
-  "plugins": [
-    [
-      "transform-runtime",
-      {
-        "helpers": false,
-        "polyfill": false,
-        "regenerator": true,
-        "moduleName": "babel-runtime"
-      }
-    ]
-  ]
+  }
 }
