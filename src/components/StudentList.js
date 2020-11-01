@@ -1,26 +1,47 @@
 import React, { Component } from 'react';
-import { apiGetStudents } from '../api/student';
+import { apiGetStudents, apiAddStudent } from '../api/student';
 import { StudentItem } from './StudentItem';
+import { StudentModel } from '../models';
 
 export class StudentList extends Component {
   // eslint-disable-next-line react/state-in-constructor
   state = {
     students: [],
-    openAddBlock: 'none',
+    isOpenAddBlock: 'true',
+    name: '',
   };
 
   componentDidMount() {
-    apiGetStudents().then(this.setStudents).catch(console.error);
+    // eslint-disable-next-line no-unused-expressions
+    this.getAllStudents();
   }
+
+  getAllStudents = () => {
+    apiGetStudents().then(this.setStudents).catch(console.error);
+  };
 
   setStudents = (students) => {
     this.setState({ students });
   };
 
-  changeOpenAddBlockStatus = () => {
-    // eslint-disable-next-line react/no-access-state-in-setstate
-    const status = this.state.openAddBlock === 'none' ? 'block' : 'none';
-    this.setState({ openAddBlock: status });
+  changeIsOpenAddBlockStatus = () => {
+    this.setState({ isOpenAddBlock: false });
+  };
+
+  changeText = (e) => {
+    this.setState({
+      name: e.target.value,
+    });
+  };
+
+  enterAdd = (e) => {
+    if (e.keyCode === 13) {
+      this.setState({
+        isOpenAddBlock: true,
+      });
+      const student = new StudentModel('', this.state.name);
+      apiAddStudent(student).then(() => this.getAllStudents());
+    }
   };
 
   render() {
@@ -31,15 +52,21 @@ export class StudentList extends Component {
         {students.map((student) => (
           <StudentItem key={student.id} student={student} />
         ))}
-        {/* eslint-disable-next-line react/button-has-type */}
-        <button className="add-student" onClick={this.changeOpenAddBlockStatus}>
-          +添加学员
-        </button>
-        <div style={{ display: this.state.openAddBlock }} className="student-form">
-          <form>
-            <input type="text" placeholder="姓名" />
-          </form>
-        </div>
+        {this.state.isOpenAddBlock ? (
+          // eslint-disable-next-line jsx-a11y/click-events-have-key-events
+          <button className="item" type="button" onClick={this.changeIsOpenAddBlockStatus}>
+            +添加学员
+          </button>
+        ) : (
+          <div className="item">
+            <input
+              type="text"
+              value={this.state.name}
+              onChange={this.changeText}
+              onKeyUp={this.enterAdd}
+            />
+          </div>
+        )}
       </div>
     );
   }

@@ -1,10 +1,10 @@
 import { StudentModel } from '../models';
 import { httpGet, httpPost } from './base';
 
-const ENDPOINT = 'http://localhost:8080/students';
-
+const getStudentsURL = 'http://localhost:8080/students';
+const postStudentURL = 'http://localhost:8080/student';
 export async function apiGetStudents() {
-  const response = await httpGet(ENDPOINT);
+  const response = await httpGet(getStudentsURL);
   const data = await response.json();
 
   if (response.status !== 200) {
@@ -15,7 +15,7 @@ export async function apiGetStudents() {
 }
 
 export async function apiAddStudent(product) {
-  const response = await httpPost(ENDPOINT, product);
+  const response = await httpPost(postStudentURL, product);
 
   if (response.status !== 201) {
     const data = await response.json();
