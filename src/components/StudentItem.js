@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './StudentItem.scss';
+import './Student.scss';
 
 export class StudentItem extends Component {
   render() {
