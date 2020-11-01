@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { StudentItem } from './StudentItem';
 
 export class StudentGroup extends Component {
   constructor() {
@@ -22,12 +23,16 @@ export class StudentGroup extends Component {
     });
   };
 
+  groupStudentRandomly = () => {
+    axios.post('http://localhost:8080/student/groups').then(() => this.getAllGtoups());
+  };
+
   render() {
     return (
       <div className="main">
         <div className="top">
           <h1>分组列表</h1>
-          <button type="button" className="group-button">
+          <button type="button" className="group-button" onClick={this.groupStudentRandomly}>
             分组学员
           </button>
         </div>
@@ -39,8 +44,8 @@ export class StudentGroup extends Component {
                 <div className="group-list">
                   {
                     // eslint-disable-next-line no-shadow
-                    group.students.map((student, index) => (
-                      <div className="item" key={index}>{`${student.id}.${student.name}`}</div>
+                    group.students.map((student) => (
+                      <StudentItem key={student.id} student={student} />
                     ))
                   }
                 </div>

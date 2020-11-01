@@ -34,13 +34,14 @@ export class StudentList extends Component {
     });
   };
 
-  enterAdd = (e) => {
+  enterAddStudent = (e) => {
     if (e.keyCode === 13) {
       this.setState({
         isOpenAddBlock: true,
       });
       const student = new StudentModel('', this.state.name);
       apiAddStudent(student).then(() => this.getAllStudents());
+      this.setState({ name: '' });
     }
   };
 
@@ -54,16 +55,16 @@ export class StudentList extends Component {
         ))}
         {this.state.isOpenAddBlock ? (
           // eslint-disable-next-line jsx-a11y/click-events-have-key-events
-          <button className="item" type="button" onClick={this.changeIsOpenAddBlockStatus}>
+          <button className="input-item" type="button" onClick={this.changeIsOpenAddBlockStatus}>
             +添加学员
           </button>
         ) : (
-          <div className="item">
+          <div className="input-item">
             <input
               type="text"
               value={this.state.name}
               onChange={this.changeText}
-              onKeyUp={this.enterAdd}
+              onKeyUp={this.enterAddStudent}
             />
           </div>
         )}
