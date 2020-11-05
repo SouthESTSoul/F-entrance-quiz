@@ -34,6 +34,7 @@ export class StudentList extends Component {
     });
   };
 
+  // TODO GTB-工程实践: - 方法的命名不够简洁，叫addStudent就好了
   enterAddStudent = (e) => {
     if (e.keyCode === 13) {
       this.setState({

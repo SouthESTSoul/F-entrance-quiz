@@ -16,6 +16,7 @@ export class StudentGroup extends Component {
   }
 
   getAllGtoups = () => {
+    // TODO GTB-工程实践: - API相关的代码需要抽取到一个独立文件
     axios.get('http://localhost:8080/student/groups').then((res) => {
       this.setState({
         groups: res.data,
@@ -24,6 +25,7 @@ export class StudentGroup extends Component {
   };
 
   groupStudentRandomly = () => {
+    // TODO GTB-工程实践: - API相关的代码需要抽取到一个独立文件
     axios.post('http://localhost:8080/student/groups').then(() => this.getAllGtoups());
   };
 
@@ -39,11 +41,13 @@ export class StudentGroup extends Component {
         {this.state.groups.length > 0 && this.state.groups[0].students.length > 0 ? (
           <div className="groups">
             {this.state.groups.map((group, index) => (
+                // TODO GTB-知识点: - 不要使用index作为key
               <div className="group" key={index}>
                 <div className="group-name">{`${group.groupName}`}</div>
                 <div className="group-list">
                   {
                     // eslint-disable-next-line no-shadow
+                    // TODO GTB-知识点: - map里面套map,其实已经在提示你应该再抽取一层Group组件了
                     group.students.map((student) => (
                       <StudentItem key={student.id} student={student} />
                     ))

@@ -1,8 +1,10 @@
 import { StudentModel } from '../models';
 import { httpGet, httpPost } from './base';
-
+// TODO GTB-工程实践: - http://localhost:8080可以提取为公共变量
 const getStudentsURL = 'http://localhost:8080/students';
 const postStudentURL = 'http://localhost:8080/student';
+
+// TODO GTB-工程实践: - 方法的名字里面不用加api
 export async function apiGetStudents() {
   const response = await httpGet(getStudentsURL);
   const data = await response.json();
